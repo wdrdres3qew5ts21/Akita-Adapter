@@ -132,13 +132,13 @@ export class ProductService {
             
             let colorField  = "color"
             let sizeField  = "size"
-            if(sourceVariant.variantOption.Size == "L"){
+            if(sourceVariant.variantOption.Size.toUpperCase() == "L".toUpperCase()){
                 child[sizeField] = "12"
             }
             else{
                 child[sizeField] = "11"
             }
-            if(sourceVariant.variantOption.Color == "black"){
+            if(sourceVariant.variantOption.Color.toUpperCase() == "black".toUpperCase()){
                 child[colorField] = "9"
             }else{
                 child[colorField] = "10"
