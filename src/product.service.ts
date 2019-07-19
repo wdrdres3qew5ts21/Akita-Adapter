@@ -125,8 +125,24 @@ export class ProductService {
                     "stock": {
                         "is_in_stock": sourceVariant.status == "active" ? true : false
                     },
-                    "product_id": source.id
+                    "product_id": source.id,
+                 //   "color": "9",
+                 //   "size": "11"
                 }
+            
+            let colorField  = "color"
+            let sizeField  = "size"
+            if(sourceVariant.variantOption.Size == "L"){
+                child[sizeField] = "12"
+            }
+            else{
+                child[sizeField] = "11"
+            }
+            if(sourceVariant.variantOption.Color == "black"){
+                child[colorField] = "9"
+            }else{
+                child[colorField] = "10"
+            }
                 // sourceVariant.option_values.map((ov) => {
                 //     if (!filter_options[ov.option_display_name + '_options']) filter_options[ov.option_display_name + '_options'] = new Set() // we need to aggregate the options from child items
                 //     filter_options[ov.option_display_name + '_options'].add(ov.label)
