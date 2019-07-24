@@ -27,7 +27,8 @@
     "elasticsearch": "^15.1.1",
     "reflect-metadata": "^0.1.12",
     "rimraf": "^2.6.2",
-    "rxjs": "^6.3.3"
+    "rxjs": "^6.3.3",
+    "stjs": "^0.0.5"
   },
   "devDependencies": {
     "@nestjs/testing": "^6.0.0",
