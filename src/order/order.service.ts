@@ -29,7 +29,7 @@ export class OrderService {
         options.forEach(option => {
             optionList[option.label] = option.value
         })
-        return optionList;
+        return JSON.stringify(optionList);
     }
 
     /** Group address to string */
