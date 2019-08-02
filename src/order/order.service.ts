@@ -3,6 +3,7 @@ import MOCK from '../mock/mock-order';
 
 @Injectable()
 export class OrderService {
+    private parsed = {}
 
     /** Extract each of order item */
     extractOrders(products: any[]) {
@@ -58,7 +59,7 @@ export class OrderService {
     /** Transform order from VueStorefront to Akita format */
     async createOrder(orderData) {
         let addressInfo = orderData.addressInformation.shippingAddress;
-        let parsed = {
+        this.parsed = {
             id: orderData.cart_id,
             thirdPartyOrderNo: '',
             vatRate: MOCK.VAT_RATE,
@@ -80,6 +81,11 @@ export class OrderService {
             },
             orderItems: this.extractOrders(orderData.products)
         }
-        return parsed;
+        return this.parsed;
+    }
+
+    /** Show order details in '/api/order/get' route */
+    async getOrder() {
+        return this.parsed;
     }
 }
