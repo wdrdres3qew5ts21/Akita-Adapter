@@ -76,6 +76,24 @@ export class ProductService {
     }
 
     async createProduct(source): Promise<any> {
+        const VISIBILITY = {
+            CATALOG_SEARCH: 4,
+            SEARCH: 3,
+            CATALOG: 2,
+            NOT_VISIBLE_INDIVIDUALLY: 1
+        }
+        const VARIANT = {
+            SIZE: "size",
+            COLOR: "color"
+        }
+        const MOCK_SIZE = {
+            XL: "11",
+            L: "12"
+        }
+        const MOCK_COLOR = {
+            BLACK: "9",
+            WHITE: "10"
+        }
         this.extractCategories(source.category)
         this.extractImage(source.photos)
         const filter_options = {}
@@ -91,7 +109,7 @@ export class ProductService {
             //      "created_at": moment(source.created_at).toJSON(),
             //      "updated_at": moment(source.updated_at).toJSON(),
             "status": 1,
-            "visibility": source.status == "true" ? 4 : 0,
+            "visibility": source.status == "true" ? VISIBILITY.CATALOG_SEARCH : VISIBILITY.NOT_VISIBLE_INDIVIDUALLY,
             "tax_class_id": source.tax_class_id,
             "description": source.description,
             "name": source.name,
@@ -129,19 +147,16 @@ export class ProductService {
                  //   "color": "9",
                  //   "size": "11"
                 }
-            
-            let colorField  = "color"
-            let sizeField  = "size"
             if(sourceVariant.variantOption.Size.toUpperCase() == "L".toUpperCase()){
-                child[sizeField] = "12"
+                child[VARIANT.SIZE] = MOCK_SIZE.L
             }
             else{
-                child[sizeField] = "11"
+                child[VARIANT.SIZE] = MOCK_SIZE.XL
             }
             if(sourceVariant.variantOption.Color.toUpperCase() == "black".toUpperCase()){
-                child[colorField] = "9"
+                child[VARIANT.COLOR] = MOCK_COLOR.BLACK
             }else{
-                child[colorField] = "10"
+                child[VARIANT.COLOR] = MOCK_COLOR.WHITE
             }
                 // sourceVariant.option_values.map((ov) => {
                 //     if (!filter_options[ov.option_display_name + '_options']) filter_options[ov.option_display_name + '_options'] = new Set() // we need to aggregate the options from child items
@@ -159,10 +174,10 @@ export class ProductService {
                     "position": 1,
                     "values": [
                         {
-                            "value_index": 9
+                            "value_index": MOCK_COLOR.BLACK
                         },
                         {
-                            "value_index": 10
+                            "value_index": MOCK_COLOR.WHITE
                         }
                     ],
                     "product_id": 1,
@@ -175,10 +190,10 @@ export class ProductService {
                     "position": 1,
                     "values": [
                         {
-                            "value_index": 11
+                            "value_index": MOCK_SIZE.XL
                         },
                         {
-                            "value_index": 12
+                            "value_index": MOCK_SIZE.L
                         }
                     ],
                     "product_id": 12,

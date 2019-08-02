@@ -5,8 +5,8 @@ export class OrderService {
 
     /** Extract each of order item */
     extractOrders(products: any[]) {
-        var items = [];
-        products.forEach(product => {
+        let items = [];
+        products.map(product => {
             items.push({
                 productSkuId: product.id,
                 productSkuCode: product.sku,
@@ -25,8 +25,8 @@ export class OrderService {
 
     /** Transform variant option format */
     transformOptions(options: any[]) {
-        var optionList = {};
-        options.forEach(option => {
+        let optionList = {};
+        options.map(option => {
             optionList[option.label] = option.value
         })
         return JSON.stringify(optionList);
@@ -34,8 +34,8 @@ export class OrderService {
 
     /** Group address to string */
     groupAddress(streets: any[]) {
-        var address = '';
-        streets.forEach((street, key, streets) => {
+        let address = '';
+        streets.map((street, key, streets) => {
             if (Object.is(streets.length - 1, key)) {
                 address += street
             } else {
@@ -45,9 +45,10 @@ export class OrderService {
         return address;
     }
 
+    /** Sum order's products price */
     sumTotal(products: any[]) {
-        var net = 0;
-        products.forEach(product => {
+        let net = 0;
+        products.map(product => {
             net += product.totals.row_total
         })
         return net;
@@ -55,11 +56,11 @@ export class OrderService {
 
     /** Transform order from VueStorefront to Akita format */
     async createOrder(orderData) {
-        var addressInfo = orderData.addressInformation.shippingAddress;
-        var parsed = {
+        let addressInfo = orderData.addressInformation.shippingAddress;
+        let parsed = {
             id: orderData.cart_id,
             thirdPartyOrderNo: '',
-            vatRate: 7.00,
+            vatRate: '7.00',
             net: this.sumTotal(orderData.products),
             orderChannel: 'storefront',
             note: '',
