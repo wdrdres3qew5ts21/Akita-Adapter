@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import MOCK from '../mock/mock-order';
 
 @Injectable()
 export class OrderService {
@@ -60,13 +61,13 @@ export class OrderService {
         let parsed = {
             id: orderData.cart_id,
             thirdPartyOrderNo: '',
-            vatRate: '7.00',
+            vatRate: MOCK.VAT_RATE,
             net: this.sumTotal(orderData.products),
-            orderChannel: 'storefront',
+            orderChannel: MOCK.CHANNEL.STOREFRONT,
             note: '',
-            orderState: 'new',
-            paymentState: 'not paid',
-            status: 'active',
+            orderState: MOCK.ORDER_STATE.NEW,
+            paymentState: MOCK.PAYMENT_STATE.NOT_PAID,
+            status: MOCK.STATUS.ACTIVE,
             shippingAddress: {
                 name: `${addressInfo.firstname} ${addressInfo.lastname}`,
                 email: addressInfo.email,
